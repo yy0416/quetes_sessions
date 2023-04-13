@@ -1,5 +1,41 @@
-<?php require 'inc/data/products.php'; ?>
-<?php require 'inc/head.php'; ?>
+<?php
+// Démarrage de la session
+session_start();
+//session_destroy();
+
+
+
+if (isset($_GET['add_to_cart'])) {
+    $id = $_GET['add_to_cart'];
+    // C'est plus logique qu'on écrit comme ça
+    //$_SESSION['cart'][]=$_GET['add_to_cart'];   
+    if (isset($_SESSION['cart'][$id])) {
+        $_SESSION['cart'][$id]['quantity']++;
+    } else {
+        $_SESSION['cart'][$id]['quantity'] = 1;
+    }
+}
+
+var_dump($id);
+
+
+require 'inc/data/products.php';
+require 'inc/head.php';
+require 'cart.php';
+
+
+
+
+
+
+
+
+
+
+
+?>
+
+
 <section class="cookies container-fluid">
     <div class="row">
         <?php foreach ($catalog as $id => $cookie) { ?>
